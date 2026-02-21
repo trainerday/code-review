@@ -59,7 +59,6 @@ PROJECT CONFIGURATION (.code-review.yaml)
     demote:
       - no-hardcoded-string-strict-eq
       - no-hardcoded-string-includes
-      - for-in-array
 
   To see what a rule ID is, run code-review --strict and look at the [rule-id]
   in brackets after each finding.
@@ -91,11 +90,23 @@ SETUP WITH CLAUDE CODE
   Note for humans: if you're unsure how Claude should fix a finding,
   just commit and move on. Our final code review will catch it.
 
+JSDOC ENFORCEMENT
+  code-review does not check for JSDoc — use ESLint for that.
+
+  One-time setup per project:
+    npm install --save-dev eslint eslint-plugin-jsdoc
+
+  Add the jsdoc/require-jsdoc rule to your ESLint config to require JSDoc
+  on all exported functions. Then ask Claude to add JSDoc to every exported
+  function in the project.
+
+  Add to CLAUDE.md: "Add JSDoc to every new exported function."
+
 AVAILABLE RULES
   security    Hardcoded JWTs, MongoDB URIs, private keys
   hardcoded   String literals in comparisons, .includes(), .indexOf(), function args
   quality     Loose equality (==), empty catch blocks, console.log, TODO comments,
-              for...in on arrays, throw e.message, Sentry full tracing
+              throw e.message, Sentry full tracing
 
 PREREQUISITES
   semgrep must be installed: brew install semgrep (or pip install semgrep)`);

@@ -22,6 +22,7 @@ code-review --min-severity WARNING   # Only WARNING and ERROR
 code-review --rules security         # Only security rules
 code-review --format json            # Raw semgrep JSON output
 code-review --format plain           # Human-readable semgrep output
+code-review --help                   # Full documentation and setup guide
 ```
 
 ## What It Checks
@@ -30,7 +31,7 @@ code-review --format plain           # Human-readable semgrep output
 |---|---|---|
 | **Security** | Hardcoded JWTs, MongoDB URIs with credentials, private keys | ERROR |
 | **Hardcoded Strings** | String literals in comparisons, `.includes()`, `.indexOf()`, function args | WARNING/INFO |
-| **Code Quality** | Loose equality (`==`), empty catch blocks, `console.log`, TODO comments | WARNING/INFO |
+| **Code Quality** | Loose equality (`==`), empty catch blocks, `console.log`, TODO comments, `throw e.message` (loses stack trace), Sentry full tracing | WARNING/INFO |
 
 ## Two-Tier Philosophy
 
@@ -115,6 +116,7 @@ code-review/
 │   └── code-quality.yaml
 ├── scripts/
 │   └── postinstall.js              ← Warns if semgrep not installed
+├── eslint.md                       ← ESLint + JSDoc setup guide (give to Claude)
 ├── duplicate-detector.md           ← Duplicate detector spec (planned)
 └── README.md
 ```
@@ -144,6 +146,17 @@ rules:
 | `$FN(...)` | Any function call |
 | `$X.$METHOD(...)` | Any method call |
 | `...` (in code) | Any code (zero or more statements) |
+
+## JSDoc Enforcement
+
+`code-review` does not check for JSDoc — use ESLint with [`eslint-plugin-jsdoc`](https://www.npmjs.com/package/eslint-plugin-jsdoc) for that. See [`eslint.md`](eslint.md) for a complete setup guide you can give directly to Claude Code.
+
+The recommended config only requires a one-line description on exported functions — no `@param` or `@returns` tags needed:
+
+```typescript
+/** Calculate training plan blocks from profile and activity data */
+export const getBlocks = (profileFacts, activityFacts) => {
+```
 
 ## Design Philosophy
 
