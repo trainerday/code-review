@@ -34,3 +34,40 @@ rules:
     message: console.log() found. Use a proper logger or remove before production.
     severity: INFO
     languages: [typescript, javascript]
+
+  # for...in on arrays — iterates over indices as strings, not values
+  - id: for-in-array
+    patterns:
+      - pattern: |
+          for (const $INDEX in $ARRAY) {
+            ...
+          }
+      - metavariable-regex:
+          metavariable: $ARRAY
+          regex: ".*[Aa]rray.*|.*[Ll]ist.*|.*[Ii]tems.*|.*[Ee]lements.*|.*[Ii]ndexes.*|.*[Ii]ndices.*|.*[Rr]esults.*|.*[Ee]ntries.*|.*[Ee]vents.*|.*[Rr]ows.*|.*[Rr]ecords.*"
+    message: >-
+      for...in iterates over array indices as strings, not values.
+      Use for...of to iterate over values, or Array.forEach().
+    severity: WARNING
+    languages: [typescript, javascript]
+
+  # throw e.message — loses stack trace, Sentry gets no context
+  - id: throw-error-message
+    patterns:
+      - pattern-either:
+          - pattern: throw $E.message
+          - pattern: throw $E.message + "..."
+    message: >-
+      Throwing e.message loses the stack trace. Throw the Error object
+      directly (throw e) or wrap it (throw new Error('...', { cause: e })).
+    severity: WARNING
+    languages: [typescript, javascript]
+
+  # Sentry tracesSampleRate set to 1.0 — expensive in production
+  - id: sentry-full-tracing
+    pattern: "tracesSampleRate: 1.0"
+    message: >-
+      tracesSampleRate: 1.0 traces 100% of requests. This is expensive
+      in production. Use a lower value like 0.1 or 0.2.
+    severity: WARNING
+    languages: [typescript, javascript]
