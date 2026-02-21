@@ -85,9 +85,11 @@ SETUP WITH CLAUDE CODE
 
     ## Code Review
     Run \`code-review\` before committing. Fix all ERROR and WARNING findings.
-    If you're unsure how to fix a finding, commit anyway and move on.
     Do not add new hardcoded strings — use constants or enums.
     Run \`code-review --help\` for full documentation.
+
+  Note for humans: if you're unsure how to fix a finding, just commit
+  and move on. You can always come back to it later.
 
 AVAILABLE RULES
   security    Hardcoded JWTs, MongoDB URIs, private keys, jwt-decode without
