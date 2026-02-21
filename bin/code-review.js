@@ -88,8 +88,8 @@ SETUP WITH CLAUDE CODE
     Do not add new hardcoded strings — use constants or enums.
     Run \`code-review --help\` for full documentation.
 
-  Note for humans: if you're unsure how to fix a finding, just commit
-  and move on. You can always come back to it later.
+  Note for humans: if you're unsure how Claude should fix a finding,
+  just commit and move on. You can always come back to it later.
 
 AVAILABLE RULES
   security    Hardcoded JWTs, MongoDB URIs, private keys, jwt-decode without
