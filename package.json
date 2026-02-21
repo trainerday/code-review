@@ -1,0 +1,27 @@
+{
+  "name": "@trainerday/code-review",
+  "version": "1.0.0",
+  "description": "Static analysis CLI for code review — runs semgrep with custom rules, deduplicates, and formats output for LLM consumption",
+  "bin": {
+    "code-review": "./bin/code-review.js"
+  },
+  "scripts": {
+    "postinstall": "node scripts/postinstall.js"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "rules/",
+    "scripts/"
+  ],
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  },
+  "keywords": [
+    "semgrep",
+    "code-review",
+    "static-analysis",
+    "linting"
+  ],
+  "license": "MIT"
+}

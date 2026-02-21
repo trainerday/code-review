@@ -1,0 +1,89 @@
+rules:
+  # === comparisons
+  - id: no-hardcoded-string-strict-eq
+    patterns:
+      - pattern: $X === "..."
+      - pattern-not: typeof $Y === "..."
+      - pattern-not: process.env.$VAR === "..."
+    message: "Hardcoded string in === comparison. Use a constant or enum instead."
+    severity: WARNING
+    languages: [typescript, javascript]
+
+  # !== comparisons
+  - id: no-hardcoded-string-strict-neq
+    patterns:
+      - pattern: $X !== "..."
+      - pattern-not: typeof $Y !== "..."
+      - pattern-not: process.env.$VAR !== "..."
+    message: "Hardcoded string in !== comparison. Use a constant or enum instead."
+    severity: WARNING
+    languages: [typescript, javascript]
+
+  # == comparisons
+  - id: no-hardcoded-string-loose-eq
+    patterns:
+      - pattern: $X == "..."
+      - pattern-not: typeof $Y == "..."
+      - pattern-not: process.env.$VAR == "..."
+    message: "Hardcoded string in == comparison. Use a constant or enum instead."
+    severity: WARNING
+    languages: [typescript, javascript]
+
+  # != comparisons
+  - id: no-hardcoded-string-loose-neq
+    patterns:
+      - pattern: $X != "..."
+      - pattern-not: typeof $Y != "..."
+      - pattern-not: process.env.$VAR != "..."
+    message: "Hardcoded string in != comparison. Use a constant or enum instead."
+    severity: WARNING
+    languages: [typescript, javascript]
+
+  # .includes() with hardcoded strings
+  - id: no-hardcoded-string-includes
+    pattern: $X.includes("...")
+    message: "Hardcoded string in .includes() call. Use a constant or enum instead."
+    severity: WARNING
+    languages: [typescript, javascript]
+
+  # .indexOf() with hardcoded strings
+  - id: no-hardcoded-string-indexof
+    pattern: $X.indexOf("...")
+    message: "Hardcoded string in .indexOf() call. Use a constant or enum instead."
+    severity: WARNING
+    languages: [typescript, javascript]
+
+  # Hardcoded strings in array literals
+  - id: no-hardcoded-string-array
+    pattern: |
+      ["...", ...]
+    message: "Hardcoded string in array literal. Consider using constants or an enum."
+    severity: INFO
+    languages: [typescript, javascript]
+
+  # Hardcoded string as function argument
+  - id: no-hardcoded-string-function-arg
+    patterns:
+      - pattern: $FN("...")
+      - pattern-not: require("...")
+      - pattern-not: console.log("...")
+      - pattern-not: console.warn("...")
+      - pattern-not: console.error("...")
+      - pattern-not: console.info("...")
+      - pattern-not: console.debug("...")
+      - pattern-not: Error("...")
+      - pattern-not: new Error("...")
+      - pattern-not: parseInt("...")
+      - pattern-not: parseFloat("...")
+      - pattern-not: JSON.parse("...")
+      - pattern-not: JSON.stringify("...")
+      - pattern-not: Buffer.from("...")
+      - pattern-not: RegExp("...")
+      - pattern-not: new RegExp("...")
+      - pattern-not: describe("...")
+      - pattern-not: it("...")
+      - pattern-not: test("...")
+      - pattern-not: expect("...")
+    message: "Hardcoded string passed to $FN(). Consider using a constant."
+    severity: INFO
+    languages: [typescript, javascript]

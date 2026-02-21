@@ -1,0 +1,36 @@
+rules:
+  # Loose equality in TypeScript (almost always a mistake)
+  - id: no-loose-equality-lhs
+    pattern: $X == "..."
+    message: Loose equality (==) used with string. Use === instead.
+    severity: WARNING
+    languages: [typescript]
+
+  - id: no-loose-inequality-lhs
+    pattern: $X != "..."
+    message: Loose inequality (!=) used with string. Use !== instead.
+    severity: WARNING
+    languages: [typescript]
+
+  # TODO/FIXME/HACK comments
+  - id: todo-comment
+    pattern-regex: "//\\s*(TODO|FIXME|HACK|XXX|TEMP|TEMPORARY)\\b"
+    message: TODO/FIXME comment found. Track and resolve.
+    severity: INFO
+    languages: [generic]
+
+  # Empty catch blocks
+  - id: empty-catch-block
+    pattern: |
+      catch ($E) {
+      }
+    message: Empty catch block silently swallows errors. At minimum, log the error.
+    severity: WARNING
+    languages: [typescript, javascript]
+
+  # console.log left in production code
+  - id: console-log-in-production
+    pattern: console.log(...)
+    message: console.log() found. Use a proper logger or remove before production.
+    severity: INFO
+    languages: [typescript, javascript]
