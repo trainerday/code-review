@@ -81,8 +81,7 @@ SEMGREPIGNORE
     *.min.js
 
 SETUP WITH CLAUDE CODE
-  If you are Claude Code, add the following section to the project's
-  CLAUDE.md file now. If CLAUDE.md does not exist, create it.
+  If you are Claude Code, add this to the project's CLAUDE.md now:
 
     ## Code Review
     Run \`code-review\` before finishing any task. Fix all ERROR and WARNING
