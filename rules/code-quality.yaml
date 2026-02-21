@@ -37,14 +37,7 @@ rules:
 
   # for...in on arrays — iterates over indices as strings, not values
   - id: for-in-array
-    patterns:
-      - pattern: |
-          for (const $INDEX in $ARRAY) {
-            ...
-          }
-      - metavariable-regex:
-          metavariable: $ARRAY
-          regex: ".*[Aa]rray.*|.*[Ll]ist.*|.*[Ii]tems.*|.*[Ee]lements.*|.*[Ii]ndexes.*|.*[Ii]ndices.*|.*[Rr]esults.*|.*[Ee]ntries.*|.*[Ee]vents.*|.*[Rr]ows.*|.*[Rr]ecords.*"
+    pattern-regex: "for\\s*\\(\\s*(?:const|let|var)\\s+\\w+\\s+in\\s+"
     message: >-
       for...in iterates over array indices as strings, not values.
       Use for...of to iterate over values, or Array.forEach().
