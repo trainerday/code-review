@@ -92,8 +92,7 @@ SETUP WITH CLAUDE CODE
   just commit and move on. Our final code review will catch it.
 
 AVAILABLE RULES
-  security    Hardcoded JWTs, MongoDB URIs, private keys, jwt-decode without
-              verify, cors() with no origin config
+  security    Hardcoded JWTs, MongoDB URIs, private keys
   hardcoded   String literals in comparisons, .includes(), .indexOf(), function args
   quality     Loose equality (==), empty catch blocks, console.log, TODO comments,
               for...in on arrays, throw e.message, Sentry full tracing
