@@ -89,7 +89,7 @@ SETUP WITH CLAUDE CODE
     Run \`code-review --help\` for full documentation.
 
   Note for humans: if you're unsure how Claude should fix a finding,
-  just commit and move on. You can always come back to it later.
+  just commit and move on. Our final code review will catch it.
 
 AVAILABLE RULES
   security    Hardcoded JWTs, MongoDB URIs, private keys, jwt-decode without
